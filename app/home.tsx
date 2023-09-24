@@ -11,10 +11,9 @@ interface PropTypes {
   initialJobs: Job[]
 }
 
-export default function Home({initialJobs}: PropTypes) {
+export default function Home({ initialJobs }: PropTypes) {
   const [jobs, setJobs] = useState(initialJobs)
-
-  console.log(jobs)
+  const [loading, setLoading] = useState(false)
 
   return (
     <main className="bg-zinc-100 min-h-screen py-16">
@@ -34,12 +33,12 @@ export default function Home({initialJobs}: PropTypes) {
           </h2>
         </div>
 
-        <SearchComponent setJobs={setJobs} />
+        <SearchComponent setJobs={setJobs} setLoading={setLoading} />
 
-        <div className="flex items-center mb-8 gap-2  mx-auto w-fit">
+        {/* <div className="flex items-center mb-8 gap-2  mx-auto w-fit">
           <Search className="text-zinc-400" />
           <p className="text-zinc-500 text-sm">28,726 Python Developer jobs</p>
-        </div>
+        </div> */}
 
         <div className="grid grid-cols-[repeat(auto-fit,_minmax(200px,_1fr))] gap-4 mb-8">
           {jobs.map((job: Job) => (
@@ -72,11 +71,13 @@ export default function Home({initialJobs}: PropTypes) {
           ))}
         </div>
 
-        <p className="text-zinc-600 text-center">Loading...</p>
-        <div className="flex flex-col justify-center items-center gap-2 w-fit mx-auto">
-          <SearchX className="text-zinc-400" />
-          <p className="text-zinc-600 text-center">Not found</p>
-        </div>
+        {loading && <p className="text-zinc-600 text-center">Loading...</p>}
+        {jobs.length === 0 && !loading && (
+          <div className="flex flex-col justify-center items-center gap-2 w-fit mx-auto">
+            <SearchX className="text-zinc-400" />
+            <p className="text-zinc-600 text-center">Not found</p>
+          </div>
+        )}
       </section>
     </main>
   )

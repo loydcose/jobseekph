@@ -6,3 +6,7 @@ interface Job {
   image: string | null
   link: string
 }
+
+// interface JobSearch extends Job {
+//   totalJobs: string
+// }

@@ -42,7 +42,6 @@ const getInitialJobs = async (searchStr?: string): Promise<Job[] | null> => {
       jobs = [...jobs, job]
     })
 
-    console.log({ jobs })
     return jobs
   } catch (e) {
     console.log(e)

@@ -1,17 +1,19 @@
 "use client"
 
 import { X } from "lucide-react"
-import { Dispatch, useRef, FormEvent } from "react"
+import { Dispatch, useRef, FormEvent, SetStateAction } from "react"
 import { getInitialJobs } from "../lib/getJobs"
 
 interface PropTypes {
-  setJobs: Dispatch<Job[]>
+  setJobs: Dispatch<Job[]>  
+  setLoading: Dispatch<SetStateAction<boolean>>
 }
 
-export default function Search({ setJobs }: PropTypes) {
+export default function Search({ setJobs, setLoading }: PropTypes) {
   const searchRef = useRef<HTMLInputElement>(null)
 
   const getSearchedJobs = async () => {
+    setLoading(true)
     try {
       if (searchRef.current) {
         let fetchJobs = []
@@ -25,6 +27,7 @@ export default function Search({ setJobs }: PropTypes) {
     } catch (error) {
       console.log(error)
     }
+    setLoading(false)
   }
 
   const handleSearch = async (e: FormEvent<HTMLFormElement>) => {
