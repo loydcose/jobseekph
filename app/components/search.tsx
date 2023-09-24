@@ -1,7 +1,7 @@
 "use client"
 
 import { X } from "lucide-react"
-import { Dispatch, SetStateAction, useRef, FormEvent } from "react"
+import { Dispatch, useRef, FormEvent } from "react"
 import { getInitialJobs } from "../lib/getJobs"
 
 interface PropTypes {
@@ -11,16 +11,32 @@ interface PropTypes {
 export default function Search({ setJobs }: PropTypes) {
   const searchRef = useRef<HTMLInputElement>(null)
 
+  const getSearchedJobs = async () => {
+    try {
+      if (searchRef.current) {
+        let fetchJobs = []
+        if (searchRef.current.value.trim() === "") {
+          fetchJobs = (await getInitialJobs()) || []
+        } else {
+          fetchJobs = (await getInitialJobs(searchRef.current.value)) || []
+        }
+        setJobs(fetchJobs)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   const handleSearch = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    getSearchedJobs()
+  }
+
+  const handleClear = () => {
     if (searchRef.current) {
-      try {
-        const jobs = (await getInitialJobs(searchRef.current.value)) || []
-        setJobs(jobs)
-      } catch (error) {
-        console.log(error)
-      }
+      searchRef.current.value = ""
     }
+    getSearchedJobs()
   }
 
   return (
@@ -35,6 +51,7 @@ export default function Search({ setJobs }: PropTypes) {
         placeholder="Search jobs..."
       />
       <button
+        onClick={handleClear}
         type="button"
         className="p-1 rounded-full hover:bg-zinc-100 text-zinc-400"
       >
