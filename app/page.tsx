@@ -20,6 +20,7 @@ export default function Home() {
     })
   }, [])
 
+
   return (
     <main className="bg-zinc-100 min-h-screen py-16">
       <section className="max-w-4xl mx-auto w-11/12">
@@ -76,13 +77,15 @@ export default function Home() {
           ))}
         </div>
 
+        
+
         {loading && <p className="text-zinc-600 text-center">Loading...</p>}
-        {jobs.length === 0 && !loading && (
+        {/* {jobs.length === 0 && !loading && (
           <div className="flex flex-col justify-center items-center gap-2 w-fit mx-auto">
             <SearchX className="text-zinc-400" />
             <p className="text-zinc-600 text-center">Not found</p>
           </div>
-        )}
+        )} */}
       </section>
     </main>
   )

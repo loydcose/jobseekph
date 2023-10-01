@@ -17,12 +17,11 @@ export default function Search({ setJobs, setLoading }: PropTypes) {
 
     const { value } = searchRef.current
     setLoading(true)
+    setJobs([])
 
     if (searchRef.current.value.trim() === "") {
-      setLoading(true)
       getInitJobs().then((res) => setJobs(res))
     } else {
-      setLoading(true)
       getJobsBySearch(value).then((res) => setJobs(res))
     }
 
@@ -40,6 +39,7 @@ export default function Search({ setJobs, setLoading }: PropTypes) {
     }
     getSearchedJobs()
   }
+  
 
   return (
     <form
