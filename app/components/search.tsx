@@ -1,9 +1,8 @@
 "use client"
 
-import axios from "axios"
 import { X } from "lucide-react"
 import { Dispatch, useRef, FormEvent, SetStateAction } from "react"
-import { getApiUrl } from "../lib/getApiUrl"
+import { getInitJobs, getJobsBySearch } from "../lib/getJobs"
 
 interface PropTypes {
   setJobs: any
@@ -15,28 +14,19 @@ export default function Search({ setJobs, setLoading }: PropTypes) {
 
   const getSearchedJobs = async () => {
     if (!searchRef.current) return
+
     const { value } = searchRef.current
+    setLoading(true)
 
-    try {
+    if (searchRef.current.value.trim() === "") {
       setLoading(true)
-      let jobsSearched = []
-
-      if (searchRef.current.value.trim() === "") {
-        console.log("if condition runs!")
-        const url = `${getApiUrl()}/api/search`
-        const { data: res } = await axios.get(url)
-        jobsSearched = res
-      } else {
-        const url = `${getApiUrl()}/api/search?q=${value.trim()}`
-        const { data: res } = await axios.get(url)
-        jobsSearched = res
-      }
-      setJobs(jobsSearched)
-    } catch (error) {
-      console.log(error)
-    } finally {
-      setLoading(false)
+      getInitJobs().then((res) => setJobs(res))
+    } else {
+      setLoading(true)
+      getJobsBySearch(value).then((res) => setJobs(res))
     }
+
+    setLoading(false)
   }
 
   const handleSearch = async (e: FormEvent<HTMLFormElement>) => {

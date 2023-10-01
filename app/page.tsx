@@ -6,28 +6,19 @@ import Link from "next/link"
 import { useState, useEffect } from "react"
 import SearchComponent from "./components/search"
 import axios from "axios"
-import { getApiUrl } from "./lib/getApiUrl"
+import { getInitJobs } from "./lib/getJobs"
 
 export default function Home() {
   const [jobs, setJobs] = useState<Job[]>([])
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    console.log("use effect runs!")
     setLoading(true)
-    axios
-      .get(`${getApiUrl()}/api/search`)
-      .then((res) => {
-        setLoading(false)
-        setJobs(res.data)
-      })
-      .catch((err) => {
-        console.log(err.message)
-        setLoading(false)
-      })
+    getInitJobs().then((res) => {
+      setJobs(res)
+      setLoading(false)
+    })
   }, [])
-
-  console.log(jobs)
 
   return (
     <main className="bg-zinc-100 min-h-screen py-16">
