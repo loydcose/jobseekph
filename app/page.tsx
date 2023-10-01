@@ -7,6 +7,7 @@ import { useState, useEffect } from "react"
 import SearchComponent from "./components/search"
 import axios from "axios"
 import { getInitJobs } from "./lib/getJobs"
+import 'animate.css';
 
 export default function Home() {
   const [jobs, setJobs] = useState<Job[]>([])
@@ -47,11 +48,12 @@ export default function Home() {
         </div> */}
 
         <div className="grid grid-cols-[repeat(auto-fit,_minmax(200px,_1fr))] gap-4 mb-8">
-          {jobs.map((job: Job) => (
+          {jobs.map((job: Job, index) => (
             <Link
               href={job.link}
               key={job.id}
-              className="p-4 bg-white rounded-md shadow-md hover:shadow-lg hover:scale-[101%] transition-all group"
+              style={{animationDelay: `${index * 100}ms`, animationDuration: "500ms"}}
+              className="animate__animated animate__zoomIn p-4 bg-white rounded-md shadow-md hover:shadow-lg hover:scale-[101%] transition-all group"
             >
               <div className="flex items-start justify-between">
                 <div className="w-[35px] h-[35px] mb-2">
