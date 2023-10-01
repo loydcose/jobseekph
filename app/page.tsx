@@ -53,7 +53,7 @@ export default function Home() {
               href={job.link}
               key={job.id}
               style={{animationDelay: `${index * 100}ms`, animationDuration: "500ms"}}
-              className="animate__animated animate__zoomIn p-4 bg-white rounded-md shadow-md hover:shadow-lg hover:scale-[101%] transition-all group"
+              className="animate__animated animate__zoomIn p-4 bg-white rounded-lg shadow-md hover:shadow-lg hover:scale-[101%] transition-all group"
             >
               <div className="flex items-start justify-between">
                 <div className="w-[35px] h-[35px] mb-2">

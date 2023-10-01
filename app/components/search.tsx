@@ -44,7 +44,7 @@ export default function Search({ setJobs, setLoading }: PropTypes) {
   return (
     <form
       onSubmit={(e) => handleSearch(e)}
-      className="mx-auto w-full flex items-center gap-2 p-2 focus-within:ring-1 focus-within:ring-blue-600 rounded-sm mb-8 bg-white shadow-md"
+      className="mx-auto w-full flex items-center gap-2 p-2 focus-within:ring-1 focus-within:ring-blue-600 rounded-lg mb-8 bg-white shadow-md"
     >
       <input
         ref={searchRef}
@@ -61,7 +61,7 @@ export default function Search({ setJobs, setLoading }: PropTypes) {
       </button>
       <button
         type="submit"
-        className="bg-blue-600 px-6 py-2 text-white rounded-sm hover:bg-blue-700 transition-colors text-sm"
+        className="bg-blue-600 px-6 py-2 text-white hover:bg-blue-700 transition-colors text-sm rounded-lg"
       >
         Search
       </button>
