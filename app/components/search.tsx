@@ -44,12 +44,12 @@ export default function Search({ setJobs, setLoading }: PropTypes) {
   return (
     <form
       onSubmit={(e) => handleSearch(e)}
-      className="mx-auto w-full flex items-center gap-2 p-2 focus-within:ring-1 focus-within:ring-blue-600 rounded-lg mb-8 bg-white shadow-md"
+      className="mx-auto w-full flex items-center gap-2 p-2 focus-within:ring-1 focus-within:ring-blue-600 rounded-lg mb-4 md:mb-8 bg-white shadow-md"
     >
       <input
         ref={searchRef}
         type="text"
-        className="py-2 px-6 text-sm min-w-0 w-full outline-none"
+        className="py-2 px-2 md:px-4 text-sm min-w-0 w-full outline-none text-zinc-600"
         placeholder="Search jobs..."
       />
       <button
